@@ -15,8 +15,8 @@
 <body>
   <header class="navbar">
     <div class="container">
-      <a href="#" class="logo">Home</a>
-      <a href="#" class="login-button">Login</a>
+      <a href="home.php" class="logo">Home</a>
+      <a href="login.php" class="login-button">Login</a>
     </div>
   </header>
   <main class="main-content">
