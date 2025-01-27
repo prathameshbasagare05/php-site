@@ -1,38 +1,4 @@
-<?php 
-include "connection.php"; 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $full_name = $_POST['full_name'];
-    $username = $_POST['username'];
-    $mobile = $_POST['mobile'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
-    $gender = $_POST['gender'];
-
-    
-    if ($password !== $confirm_password) {
-        echo "<script>alert('Passwords do not match!');</script>";
-    } else {
-        $query = "SELECT * FROM Users WHERE Username = '$username' OR EmailID = '$email' OR MobileNumber = '$mobile'";
-        $result = $conn->query($query);
-
-        if ($result->num_rows > 0) {
-            echo "<script>alert('Username, Email, or Mobile already exists!');</script>";
-        } else {
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT); 
-            $insert_query = "INSERT INTO Users (FullName, Username, MobileNumber, EmailID, PasswordHash, Gender) 
-                             VALUES ('$full_name', '$username', '$mobile', '$email', '$hashed_password', '$gender')";
-
-            if ($conn->query($insert_query) === TRUE) {
-                echo "<script>alert('Registration successful!');</script>";
-            } else {
-                echo "<script>alert('Error in registration: " . $conn->error . "');</script>";
-            }
-        }
-    }
-}
-?>
+<?php include "connection.php"; ?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,9 +65,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="radio" name="gender" value="Other"> Other
           </label>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" name="submit">Submit</button>
       </form>
     </div>
   </main>
+  <?php 
+    if (isset($_POST['submit'])) {
+        $full_name = htmlspecialchars($_POST['full_name']);
+        $username = htmlspecialchars($_POST['username']);
+        $mobile = htmlspecialchars($_POST['mobile']);
+        $email = htmlspecialchars($_POST['email']);
+        $password = htmlspecialchars($_POST['password']);
+        $confirm_password = htmlspecialchars($_POST['confirm_password']);
+        $gender = $_POST['gender'];
+
+        
+        if ($password !== $confirm_password) {
+            echo "<script>alert('Passwords do not match!');</script>";
+        } else {
+            $query = "SELECT * FROM Users WHERE Username = '$username' OR EmailID = '$email' OR MobileNumber = '$mobile'";
+            $result = $conn->query($query);
+
+            if ($result->num_rows > 0) {
+                echo "<script>alert('Username, Email, or Mobile already exists!');</script>";
+            } else {
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT); 
+                $insert_query = "INSERT INTO Users (FullName, Username, MobileNumber, EmailID, PasswordHash, Gender) 
+                                VALUES ('$full_name', '$username', '$mobile', '$email', '$hashed_password', '$gender')";
+
+                if ($conn->query($insert_query) === TRUE) {
+                    echo "<script>alert('Registration successful!');</script>";
+                } else {
+                    echo "<script>alert('Error in registration: " . $conn->error . "');</script>";
+                }
+            }
+            
+        }
+    }
+?>
 </body>
 </html>
