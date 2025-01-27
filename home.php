@@ -23,7 +23,7 @@ include "connection.php" ;
       <?php
         if(isset($_SESSION['username'])) {
           echo '<a href="#" class="logo">Edit Account</a>';
-          echo '<a href="home.php" class="login-button">Logout</a>';
+          echo '<a href="logout.php" class="login-button">Logout</a>';
         }else{
           echo '<a href="login.php" class="login-button">Login</a>';
         }      
