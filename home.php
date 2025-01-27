@@ -12,6 +12,12 @@
       <a href="#" class="logo">Home</a>
       <a href="login.php" class="login-button">Login</a>
     </div>
+    <style>
+      body{
+        background: url('images/home-bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+      }
+    </style>
   </header>
   <main class="main-content">
     <div class="content">
