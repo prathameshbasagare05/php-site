@@ -149,3 +149,75 @@ body {
     text-decoration: underline;
   }
   
+
+  /* Signup */
+  
+  .register-box {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .register-box h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .form-group {
+    flex: 1;
+    margin: 0 2%;
+  }
+  
+  .register-box label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  .register-box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+  }
+  
+  .gender-selection {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .gender-selection label {
+    display: flex;
+    margin-right: 15px;
+    font-size: 14px;
+  }
+  
+  .register-box button { 
+    width: 100%;
+    padding: 10px;
+    background-color: #4a90e2;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .register-box button:hover {
+    background-color: #357ab7;
+  }
