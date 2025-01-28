@@ -1,6 +1,6 @@
 <header class="navbar">
     <div class="container">
-      <a href="#" class="logo">Home</a>
+      <a href="home.php" class="logo">Home</a>
       <?php
         if(isset($_SESSION['username'])) {
           echo '<a href="edit-acc.php" class="logo">Edit Account</a>';
