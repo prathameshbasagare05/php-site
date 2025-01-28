@@ -221,3 +221,43 @@ body {
   .register-box button:hover {
     background-color: #357ab7;
   }
+
+
+  /* Edit Acc */
+  .profile-fields{
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  .profile-fields input {
+    /* width: 100%; */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin: 0 15px;
+    outline: none;
+    font-size: 14px;
+  }
+  .profile-fields .field{
+    /* background-color: aqua; */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .profile-fields .field .item{
+    width: 33%;
+  }
+  .profile-fields button{
+    /* width: 100%; */
+    padding: 10px;
+    background-color: #4a90e2;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
