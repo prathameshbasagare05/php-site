@@ -1,4 +1,8 @@
-<?php include "connection.php"; ?> 
+<?php 
+include "connection.php";
+session_start();
+if(isset($_SESSION['username'])) header("location:home.php");
+?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,12 +18,7 @@
   </style>
 </head>
 <body>
-  <header class="navbar">
-    <div class="container">
-      <a href="home.php" class="logo">Home</a>
-      <a href="login.php" class="login-button">Login</a>
-    </div>
-  </header>
+<?php include "navbar.php"; ?>
   <main class="main-content">
     <div class="register-box">
       <h1>REGISTER</h1>

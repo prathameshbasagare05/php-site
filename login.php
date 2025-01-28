@@ -1,6 +1,7 @@
 <?php 
 include "connection.php" ;
 session_start();
+if(isset($_SESSION['username'])) header("location:home.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,12 +18,7 @@ session_start();
     </style>
 </head>
 <body>
-  <header class="navbar">
-    <div class="container">
-      <a href="home.php" class="logo">Home</a>
-      <a href="login.php" class="login-button">Login</a>
-    </div>
-  </header>
+<?php include "navbar.php"; ?>
   <main class="main-content">
     <div class="login-box">
       <h1>SIGN IN</h1>
@@ -48,21 +44,16 @@ session_start();
         $query = "SELECT PasswordHash from Users WHERE Username = '$username'";
         $result = $conn->query($query);
         if ($result->num_rows > 0) {
-          // Fetch the hashed password from the database
           $row = $result->fetch_assoc();
           $hashed_password = $row['PasswordHash'];
 
-          // Verify the entered password with the hashed password
           if (password_verify($password, $hashed_password)) {
-              // Start session and redirect to the dashboard or home page
               $_SESSION['username'] = $username;
               echo "<script>alert('Login successful!'); window.location.href = 'home.php';</script>";
           } else {
-              // Incorrect password
               echo "<script>alert('Incorrect password. Please try again.');</script>";
           }
           } else {
-              // Username not found
               echo "<script>alert('Username not found. Please register first.');</script>";
           }
 
