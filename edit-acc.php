@@ -12,7 +12,7 @@ if(!isset($_SESSION['username'])) header("location:home.php");
         <link rel="stylesheet" href="styles.css">
         <style>
             body{
-                background: url('images/home-bg.jpg') no-repeat center center fixed;
+                background: url('images/form-bg.jpg') no-repeat center center fixed;
                 background-size: cover;
             }
         </style>
@@ -29,30 +29,47 @@ if(!isset($_SESSION['username'])) header("location:home.php");
             $email = $row['EmailID'];
             $passwordHash = $row['PasswordHash'];
         ?>
-        <main class="main-content">
+        <section class="main-content">
             <div class = "profile-fields">
-                <form class = "field" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                <form class = "field" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>">
                     <h2 class="item">Username</h2>
                     <input class="item" type="text" name="username" id="username" value="<?php echo $username ?>">
                     <button class="item"  type="submit" name="submit-username">Change Username</button>
                 </form>
-                <form class = "field" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                <form class = "field" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>">
                     <h2 class="item" >Name</h2>
                     <input class="item"  type="text" name="name" id="name" value="<?php echo $name ?>">
                     <button class="item"  type="submit" name="submit-name">Change Name</button>
                 </form>
-                <form class = "field" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                <form class = "field" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>">
                     <h2 class="item" >Mobile Number</h2>  
                     <input class="item"  type="tel" name="mobile" id="mobile" value="<?php echo $mobile ?>">
                     <button class="item"  type="submit" name="submit-mobile">Change Mobile Number</button>
                 </form>
-                <form class = "field" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                <form class = "field" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>">
                     <h2 class="item" >Email</h2>
                     <input class="item"  type="text" name="email" id="email" value="<?php echo $email ?>">
                     <button class="item"  type="submit" name="submit-email">Change Email</button>
                 </form>
             </div>
-        </main>
+            <div class="login-box">
+                    <h1>Change Password</h1>
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                        <label for="current-pass">Current Password</label>
+                        <input type="text" id="current-pass" name="current-pass" placeholder="Enter your Current Password" required>
+                        <label for="new-pass">New Password</label>
+                        <input type="password" id="new-pass" name="new-pass" placeholder="Enter your new Password" required>
+                        <label for="password">Confirm Password</label>
+                        <input type="password" id="password" name="password" placeholder="Confirm your password" required>
+                        <button type="submit" name="change-pass">Change Password</button>
+                    </form>
+            </div>
+            
+            
+                
+
+
+        </section>
 
         <?php
             if (isset($_SESSION['alert'])) {
@@ -110,9 +127,25 @@ if(!isset($_SESSION['username'])) header("location:home.php");
                     }
                 }
                 header("Location: " . $_SERVER['PHP_SELF']);
+            }elseif(isset($_POST['current-pass'])){
+                $current_pass = htmlspecialchars($_POST['current-pass']);
+                $new_pass = htmlspecialchars($_POST['new-pass']);
+                $pass = htmlspecialchars($_POST['password']);
+                if($new_pass!=$pass){
+                    $_SESSION['alert'] = "New password and Confirm Password Do not match";
+                }else{
+                    if(password_verify($current_pass,$passwordHash)){
+                        $new_passwordHash = password_hash($pass, PASSWORD_DEFAULT);
+                        $q = "UPDATE Users SET PasswordHash='$new_passwordHash' WHERE Username = '$username'";
+                        if($conn->query($q)===TRUE){
+                            $_SESSION['alert'] = "Password Changed Successfully";
+                        }
+                    }else{
+                        $_SESSION['alert'] = "Current Password is wrong";
+                    }
+                }
+                header("Location: " . $_SERVER['PHP_SELF']);
             }
-
-
 
 
 
