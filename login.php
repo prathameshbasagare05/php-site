@@ -52,7 +52,14 @@ if (isset($_SESSION['alert'])) {
           $hashed_password = $row['PasswordHash'];
 
           if (password_verify($password, $hashed_password)) {
+              $q = "SELECT FullName, EmailID FROM Users WHERE Username = '$username'";
+              $result= $conn->query($q);
+              $r = $result->fetch_assoc();
+              $emailID = $r['EmailID'];
+              $fullName = $r['FullName'];
               $_SESSION['username'] = $username;
+              $body = "Dear ".$fullName.", "."<br>"."New Login Was Detected for your Account"."<br>"."If it was not you, please change your credentials.";
+              sendEmail($emailID,"New Login Detected",$body);
               echo "<script>alert('Login successful!'); window.location.href = 'home.php';</script>";
           } else {
               echo "<script>alert('Incorrect password. Please try again.');</script>";
