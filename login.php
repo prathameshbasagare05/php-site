@@ -2,6 +2,10 @@
 include "connection.php" ;
 session_start();
 if(isset($_SESSION['username'])) header("location:home.php");
+if (isset($_SESSION['alert'])) {
+    echo "<script>alert('" . $_SESSION['alert'] . "');</script>";
+    unset($_SESSION['alert']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

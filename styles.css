@@ -234,7 +234,7 @@ body {
     margin-top:50px;
     margin-bottom: 50px;
   }
-  .profile-fields input {
+  .field input {
     /* width: 100%; */
     padding: 10px;
     border: none;
@@ -243,17 +243,17 @@ body {
     outline: none;
     font-size: 14px;
   }
-  .profile-fields .field{
+  .field{
     /* background-color: aqua; */
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
-  .profile-fields .field .item{
+  .field .item{
     width: 33%;
   }
-  .profile-fields button{
+  .field button{
     /* width: 100%; */
     padding: 10px;
     background-color: #4a90e2;
@@ -263,4 +263,19 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+  }
+
+
+  /* Forgot Password */
+  .fields{
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 10px;
+    width:40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* margin-top:50px;
+    margin-bottom: 50px; */
   }
